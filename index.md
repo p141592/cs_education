@@ -35,6 +35,9 @@
 
 ## Базовые знания математики
 
+### Курсы:
+- https://www.coursera.org/learn/mathematical-thinking (Introduction to Mathematical Thinking)
+
 ### Книги:
 - 
 
