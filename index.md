@@ -14,6 +14,10 @@
 - https://www.coursera.org/learn/comparch (Архитектура ЭВМ)
 - https://stepik.org/course/253/promo (Архитектура ЭВМ)
 - https://www.coursera.org/specializations/c-plus-plus-modern-development (C++)
+- https://www.coursera.org/learn/programming-languages
+- https://www.coursera.org/learn/programming-languages-part-b
+- https://www.coursera.org/learn/programming-languages-part-c
+- https://training.linuxfoundation.org/training/linux-kernel-internals-and-development/#prerequisites ( Linux Kernel )
 
 ### Книги:
 - Code (Charles Petzlod) https://www.ozon.ru/context/detail/id/125884/
@@ -44,15 +48,16 @@
 ## Проектинование ПО, функциональный стиль
 
 
-
-## Сеть
-
-
-
 ## Сервера и облака
 
+### Курсы
 
+- https://www.coursera.org/specializations/computer-communications
+- https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/index.htm
+- https://www.coursera.org/specializations/cloud-computing (Cloud Computing Specialization)
+- Cloud Computing Specialization
 
 ## Виртуализация
 
-
+### Курсы
+- https://training.linuxfoundation.org/training/open-source-virtualization/ 
