@@ -18,7 +18,9 @@
 ### Книги:
 - Code (Charles Petzlod) https://www.ozon.ru/context/detail/id/125884/
 - Operating Systems: Three Easy Pieces https://github.com/mthipparthi/operating-systems-three-easy-pieces/blob/master/book.pdf
-- 
+- Structure and Interpretation of Computer Programs (Harold Abelson) https://web.mit.edu/alexmv/6.037/sicp.pdf 
+
+
 ### Лекции:
 - 
 
