@@ -43,6 +43,8 @@
 
 ## Алгоритмы
 
+### Курсы
+- https://www.coursera.org/specializations/algorithms
 
 ## Базы данных
 
