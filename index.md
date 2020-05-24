@@ -66,3 +66,9 @@
 
 ### Курсы
 - https://training.linuxfoundation.org/training/open-source-virtualization/ 
+
+
+## Расширение кругозора
+
+### Курсы
+- https://www.coursera.org/specializations/deep-learning (Deep Learning Specialization)
