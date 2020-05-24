@@ -38,12 +38,16 @@
 ### Курсы:
 - https://www.coursera.org/learn/mathematical-thinking (Introduction to Mathematical Thinking)
 - https://www.coursera.org/learn/matematika-dlya-vseh (Математика для всех)
+- https://stepik.org/course/2461 (Линейная алгебра)
 - https://www.coursera.org/learn/algebra-lineynaya (Линейная алгебра)
 - https://www.coursera.org/learn/probability-theory-basics (Теория вероятностей для начинающих)
+- https://stepik.org/course/3089 (Теория вероятностей)
 - https://www.coursera.org/learn/kombinatorika-dlya-nachinayushchikh (Комбинаторика для начинающих)
+- https://stepik.org/course/126/syllabus (Основы теории графов)
 - https://www.coursera.org/learn/teoriya-grafov (Теория графов)
 - https://www.coursera.org/learn/sluchajnye-graphy (Случайные графы)
 - https://www.coursera.org/learn/gametheory (Теория игр)
+- https://stepik.org/course/902/syllabus (Введение в дискретную математику)
 
 
 ### Книги:
@@ -52,6 +56,7 @@
 ## Алгоритмы
 
 ### Курсы
+- https://stepik.org/course/83 (Дискретные структуры)
 - https://www.coursera.org/specializations/algorithms (Специализация Алгоритмы)
 - https://www.coursera.org/learn/sportivnoe-programmirovanie (Спортивное программирование)
 
