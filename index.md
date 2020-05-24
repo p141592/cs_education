@@ -37,6 +37,15 @@
 
 ### Курсы:
 - https://www.coursera.org/learn/mathematical-thinking (Introduction to Mathematical Thinking)
+- https://www.coursera.org/learn/matematika-dlya-vseh (Математика для всех)
+- https://www.coursera.org/learn/algebra-lineynaya (Линейная алгебра)
+- https://www.coursera.org/learn/probability-theory-basics (Теория вероятностей для начинающих)
+- https://www.coursera.org/learn/kombinatorika-dlya-nachinayushchikh (Комбинаторика для начинающих)
+- https://www.coursera.org/learn/teoriya-grafov (Теория графов)
+- https://www.coursera.org/learn/sluchajnye-graphy (Случайные графы)
+- https://www.coursera.org/learn/gametheory (Теория игр)
+
+
 
 ### Книги:
 - 
@@ -44,7 +53,8 @@
 ## Алгоритмы
 
 ### Курсы
-- https://www.coursera.org/specializations/algorithms
+- https://www.coursera.org/specializations/algorithms (Специализация Алгоритмы)
+- https://www.coursera.org/learn/sportivnoe-programmirovanie (Спортивное программирование)
 
 ## Базы данных
 
@@ -57,10 +67,11 @@
 
 ### Курсы
 
-- https://www.coursera.org/specializations/computer-communications
-- https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/index.htm
+- https://www.coursera.org/learn/crypto (Cryptography I)
+- https://www.coursera.org/specializations/networking-basics (Cisco Networking Basics Specialization)
+- https://www.coursera.org/specializations/computer-communications (Computer Communications Specialization)
+- https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/ (Parallel Computing)
 - https://www.coursera.org/specializations/cloud-computing (Cloud Computing Specialization)
-- Cloud Computing Specialization
 
 ## Виртуализация
 
