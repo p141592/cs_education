@@ -13,7 +13,7 @@
 ### Курсы:
 - https://www.coursera.org/learn/comparch (Архитектура ЭВМ)
 - https://stepik.org/course/253/promo (Архитектура ЭВМ)
-- https://www.coursera.org/specializations/c-plus-plus-modern-development (C++)
+- https://www.coursera.org/specializations/c-plus-plus-modern-development (Искусство разработки на современном C++ Specialization)
 - https://www.coursera.org/learn/programming-languages
 - https://www.coursera.org/learn/programming-languages-part-b
 - https://www.coursera.org/learn/programming-languages-part-c
@@ -46,9 +46,8 @@
 - https://www.coursera.org/learn/gametheory (Теория игр)
 
 
-
 ### Книги:
-- 
+- https://github.com/hmemcpy/milewski-ctfp-pdf/ (Category Theory for Programmers)
 
 ## Алгоритмы
 
@@ -68,10 +67,17 @@
 ### Курсы
 
 - https://www.coursera.org/learn/crypto (Cryptography I)
+- https://www.udacity.com/course/computer-networking--ud436 (Security and Software Defined Networking)
 - https://www.coursera.org/specializations/networking-basics (Cisco Networking Basics Specialization)
 - https://www.coursera.org/specializations/computer-communications (Computer Communications Specialization)
 - https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/ (Parallel Computing)
 - https://www.coursera.org/specializations/cloud-computing (Cloud Computing Specialization)
+- https://www.coursera.org/professional-certificates/gcp-cloud-architect (Cloud Architecture with Google Cloud Professional Certificate)
+
+### Сертификаты:
+
+- https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/ (CKAD)
+
 
 ## Виртуализация
 
