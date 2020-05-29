@@ -13,11 +13,14 @@
 ### Курсы:
 - https://www.coursera.org/learn/comparch (Архитектура ЭВМ)
 - https://stepik.org/course/253/promo (Архитектура ЭВМ)
+- https://www.edx.org/course/compilers (Compilers)
 - https://www.coursera.org/specializations/c-plus-plus-modern-development (C++)
 - https://www.coursera.org/learn/programming-languages
 - https://www.coursera.org/learn/programming-languages-part-b
 - https://www.coursera.org/learn/programming-languages-part-c
 - https://training.linuxfoundation.org/training/linux-kernel-internals-and-development/#prerequisites ( Linux Kernel )
+- https://www.coursera.org/learn/build-a-computer#syllabus (Build a Modern Computer from First Principles: From Nand to Tetris (Project-Centered Course))
+
 
 ### Книги:
 - Code (Charles Petzlod) https://www.ozon.ru/context/detail/id/125884/
@@ -31,7 +34,7 @@
 
 
 ### Лекции:
-- 
+- https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter 
 
 ## Базовые знания математики
 
