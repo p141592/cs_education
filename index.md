@@ -14,7 +14,7 @@
 - https://www.coursera.org/learn/comparch (Архитектура ЭВМ)
 - https://stepik.org/course/253/promo (Архитектура ЭВМ)
 - https://www.edx.org/course/compilers (Compilers)
-- https://www.coursera.org/specializations/c-plus-plus-modern-development (C++)
+- https://www.coursera.org/specializations/c-plus-plus-modern-development (Искусство разработки на современном C++ Specialization)
 - https://www.coursera.org/learn/programming-languages
 - https://www.coursera.org/learn/programming-languages-part-b
 - https://www.coursera.org/learn/programming-languages-part-c
@@ -40,14 +40,28 @@
 
 ### Курсы:
 - https://www.coursera.org/learn/mathematical-thinking (Introduction to Mathematical Thinking)
+- https://www.coursera.org/learn/matematika-dlya-vseh (Математика для всех)
+- https://stepik.org/course/2461 (Линейная алгебра)
+- https://www.coursera.org/learn/algebra-lineynaya (Линейная алгебра)
+- https://www.coursera.org/learn/probability-theory-basics (Теория вероятностей для начинающих)
+- https://stepik.org/course/3089 (Теория вероятностей)
+- https://www.coursera.org/learn/kombinatorika-dlya-nachinayushchikh (Комбинаторика для начинающих)
+- https://stepik.org/course/126/syllabus (Основы теории графов)
+- https://www.coursera.org/learn/teoriya-grafov (Теория графов)
+- https://www.coursera.org/learn/sluchajnye-graphy (Случайные графы)
+- https://www.coursera.org/learn/gametheory (Теория игр)
+- https://stepik.org/course/902/syllabus (Введение в дискретную математику)
+
 
 ### Книги:
-- 
+- https://github.com/hmemcpy/milewski-ctfp-pdf/ (Category Theory for Programmers)
 
 ## Алгоритмы
 
 ### Курсы
-- https://www.coursera.org/specializations/algorithms
+- https://stepik.org/course/83 (Дискретные структуры)
+- https://www.coursera.org/specializations/algorithms (Специализация Алгоритмы)
+- https://www.coursera.org/learn/sportivnoe-programmirovanie (Спортивное программирование)
 
 ## Базы данных
 
@@ -55,17 +69,35 @@
 
 ## Проектинование ПО, функциональный стиль
 
+### Курсы
+- https://stepik.org/course/75/syllabus (Функциональное программирование на языке Haskell)
+- https://stepik.org/course/693/syllabus (Функциональное программирование на языке Haskell (часть 2))
+
 
 ## Сервера и облака
 
 ### Курсы
 
-- https://www.coursera.org/specializations/computer-communications
-- https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/index.htm
+- https://www.coursera.org/learn/crypto (Cryptography I)
+- https://www.udacity.com/course/computer-networking--ud436 (Security and Software Defined Networking)
+- https://www.coursera.org/specializations/networking-basics (Cisco Networking Basics Specialization)
+- https://www.coursera.org/specializations/computer-communications (Computer Communications Specialization)
+- https://ocw.mit.edu/courses/mathematics/18-337j-parallel-computing-fall-2011/ (Parallel Computing)
 - https://www.coursera.org/specializations/cloud-computing (Cloud Computing Specialization)
-- Cloud Computing Specialization
+- https://www.coursera.org/professional-certificates/gcp-cloud-architect (Cloud Architecture with Google Cloud Professional Certificate)
+
+### Сертификаты:
+
+- https://training.linuxfoundation.org/certification/certified-kubernetes-application-developer-ckad/ (CKAD)
+
 
 ## Виртуализация
 
 ### Курсы
 - https://training.linuxfoundation.org/training/open-source-virtualization/ 
+
+
+## Расширение кругозора
+
+### Курсы
+- https://www.coursera.org/specializations/deep-learning (Deep Learning Specialization)
