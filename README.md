@@ -8,6 +8,9 @@
 
 **Пишите коментарии и дополнения по программе в issue или ко мне в telegram https://t.me/p141592**
 
-#### Схема v0.3
-![map](education.png)
+#### Схема v2
+![map](plan/education.png)
+
+![](plan/map.png)
+
 
