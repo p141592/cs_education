@@ -94,4 +94,5 @@
 
 ### Курсы
 - https://www.coursera.org/specializations/google-golang
+- https://www.coursera.org/learn/julia-programming
 
