@@ -4,5 +4,5 @@ makemigrations:
 migrate:
 	PYTHONPATH=$(shell pwd) poetry run alembic upgrade head
 
-create_engine:
-	PYTHONPATH=$(shell pwd) poetry run python -c "from core.db import engine, Base; Base.metadata.create_all(engine)"
+merge_db:
+	# Смерджить базу с текущей

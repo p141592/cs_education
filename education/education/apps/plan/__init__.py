@@ -7,5 +7,13 @@ app = typer.Typer(
 
 
 @app.command()
-def append_point():
+def roadmap():
+    """
+    Генерация roadmap
+    """
+    pass
+
+
+@app.command()
+def stat():
     pass
