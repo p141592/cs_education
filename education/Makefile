@@ -6,3 +6,9 @@ migrate:
 
 merge_db:
 	# Смерджить базу с текущей
+
+progress:
+	jupyter notebook education/apps/plan/progress.ipynb
+
+notes:
+	jupyter notebook education/apps/materials/
