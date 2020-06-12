@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 
 
@@ -23,7 +25,7 @@ class Quiz(BaseModel):
 
 class QuizLog(BaseModel):
     quiz: int
-    date = s.Column(s.DateTime, default=func.now())
+    date: datetime
     answer: str
     result: bool
 
@@ -37,8 +39,8 @@ class Story(BaseModel):
     epic: int
     time_estimate: int
     story_points: int
-    start_date = s.Column(s.DateTime, default=func.now())
-    end_date = s.Column(s.DateTime, nullable=True)
+    start_date: datetime
+    end_date: datetime
     material: int
 
 
@@ -51,11 +53,11 @@ class Lesson(BaseModel):
 class Note(BaseModel):
     lesson: int
     text: str
-    date = s.Column(s.DateTime, default=func.now())
+    date: datetime
 
 
 class Timer(BaseModel):
-    start_date = s.Column(s.DateTime, nullable=True)
-    end_date = s.Column(s.DateTime, default=func.now())
+    start_date: datetime
+    end_date: datetime
     text: str
     lesson: int
