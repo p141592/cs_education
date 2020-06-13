@@ -8,7 +8,7 @@ merge_db:
 	# Смерджить базу с текущей
 
 progress:
-	jupyter notebook education/apps/plan/progress.ipynb
+	jupyter notebook education/apps/progress/status.ipynb
 
 notes:
 	jupyter notebook education/apps/materials/

@@ -1,7 +1,7 @@
 import typer
 
-from apps.material.exporter import app as exporter
-from apps.material.importer import app as importer
+from .exporter import app as exporter
+from .importer import app as importer
 
 
 app = typer.Typer(
@@ -11,14 +11,25 @@ app = typer.Typer(
 
 
 @app.command()
-def index(
-    content_type: str = typer.Option(None, "--content-type", "-c"),
-    material_type: str = typer.Option(None, "--material-type", "-m"),
-    section: str = typer.Option(None, "--section", "-s"),
-    format: str = typer.Option("markdown", "--format", "-f", show_default=True)
-):
+def add():
     """
-    Генерация индекса материалов
+    Добавить материал в базе
+    """
+    pass
+
+
+@app.command()
+def select():
+    """
+    Выборка по материалам
+    """
+    pass
+
+
+@app.command()
+def remove():
+    """
+    Удалить материал по ID
     """
     pass
 
