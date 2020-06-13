@@ -7,12 +7,13 @@ GCLOUD-PROJECT-ID = home-260209
 ENV = dev
 MEMORY_LIMIT = 50M
 ENV_VARIABLES = $(shell ./utils/convert_env.py $(shell pwd)/.env)
+PYTHONPATH=$(shell pwd)/education
 
 makemigrations:
-	PYTHONPATH=$(shell pwd) poetry run alembic revision --autogenerate
+	PYTHONPATH=${PYTHONPATH} poetry run alembic revision --autogenerate
 
 migrate:
-	PYTHONPATH=$(shell pwd) poetry run alembic upgrade head
+	PYTHONPATH=${PYTHONPATH} poetry run alembic upgrade head
 
 merge_db:
 	# Смерджить базу с текущей
@@ -21,7 +22,7 @@ progress:
 	jupyter notebook education/apps/progress/status.ipynb
 
 test:
-	PYTHONPATH=$(shell pwd)/education poetry run pytest -vv ${TEST_CASE}
+	PYTHONPATH=${PYTHONPATH} poetry run pytest -vv ${TEST_CASE}
 
 lock:
 	poetry lock 

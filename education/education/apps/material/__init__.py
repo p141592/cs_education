@@ -2,6 +2,7 @@ import typer
 
 from .exporter import app as exporter
 from .importer import app as importer
+from .note import app as note
 
 
 app = typer.Typer(name="material", help="Работа с материалами")
@@ -33,3 +34,4 @@ def remove():
 
 app.add_typer(importer)
 app.add_typer(exporter)
+app.add_typer(note)

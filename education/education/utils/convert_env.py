@@ -5,7 +5,7 @@ import re
 import sys
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent.parent.absolute()
+from settings import BASE_DIR
 
 
 def convert(filename):

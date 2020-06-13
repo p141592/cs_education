@@ -1,7 +1,15 @@
 import sqlalchemy as s
 from sqlalchemy import func
+from sqlalchemy.orm import relationship
 
+from core import Base
 from core.db import BaseModel
+
+
+association_table = s.Table('association', Base.metadata,
+    s.Column('left_id', s.Integer, s.ForeignKey('left.id')),
+    s.Column('right_id', s.Integer, s.ForeignKey('right.id'))
+)
 
 
 class Material(BaseModel):
@@ -10,6 +18,7 @@ class Material(BaseModel):
     content_type = s.Column(s.Integer, s.ForeignKey("contenttype.id"))
     source = s.Column(s.String)
     volume = s.Column(s.Integer, doc="Объем материала в минутах")
+    tags = relationship("Tag", secondary=association_table)
 
 
 class Resource(BaseModel):
@@ -49,12 +58,6 @@ class Lesson(BaseModel):
     title = s.Column(s.String)
     text = s.Column(s.Text)
     lesson_type = s.Column(s.Integer, s.ForeignKey("lessontype.id"))
-
-
-class Note(BaseModel):
-    lesson = s.Column(s.Integer, s.ForeignKey("lesson.id"))
-    text = s.Column(s.Text)
-    date = s.Column(s.DateTime, default=func.now())
 
 
 class Timer(BaseModel):
