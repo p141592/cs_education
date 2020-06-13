@@ -2,10 +2,7 @@ import typer
 
 from .bot import app as bot
 
-app = typer.Typer(
-    name="quiz",
-    help="Работа с задачами"
-)
+app = typer.Typer(name="quiz", help="Работа с задачами")
 
 
 @app.command()

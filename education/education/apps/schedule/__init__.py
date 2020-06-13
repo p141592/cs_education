@@ -1,9 +1,6 @@
 import typer
 
-app = typer.Typer(
-    name="schedule",
-    help="Работа с расписанием"
-)
+app = typer.Typer(name="schedule", help="Работа с расписанием")
 
 
 @app.command()

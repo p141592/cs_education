@@ -11,22 +11,28 @@ class BaseHandbook(BaseModel):
     key = s.Column(s.String)
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}: {self.title}>'
+        return f"<{self.__class__.__name__}: {self.title}>"
 
 
-class Section(BaseHandbook): pass
+class Section(BaseHandbook):
+    pass
 
 
-class MaterialType(BaseHandbook): pass
+class MaterialType(BaseHandbook):
+    pass
 
 
-class ContentType(BaseHandbook): pass
+class ContentType(BaseHandbook):
+    pass
 
 
-class Tag(BaseHandbook): pass
+class Tag(BaseHandbook):
+    pass
 
 
-class LessonType(BaseHandbook): pass
+class LessonType(BaseHandbook):
+    pass
 
 
-class QuizType(BaseHandbook): pass
+class QuizType(BaseHandbook):
+    pass

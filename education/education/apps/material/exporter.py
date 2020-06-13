@@ -1,7 +1,4 @@
 import typer
 
 
-app = typer.Typer(
-    name="export",
-    help="Экспорт материалов"
-)
+app = typer.Typer(name="export", help="Экспорт материалов")

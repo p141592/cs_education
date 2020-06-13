@@ -4,10 +4,7 @@ from .exporter import app as exporter
 from .importer import app as importer
 
 
-app = typer.Typer(
-    name="material",
-    help="Работа с материалами"
-)
+app = typer.Typer(name="material", help="Работа с материалами")
 
 
 @app.command()

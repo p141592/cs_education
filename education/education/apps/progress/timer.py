@@ -1,7 +1,4 @@
 import typer
 
 
-app = typer.Typer(
-    name="timer",
-    help="Таймер потраченного времени"
-)
+app = typer.Typer(name="timer", help="Таймер потраченного времени")

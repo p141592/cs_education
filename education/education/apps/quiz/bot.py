@@ -1,10 +1,7 @@
 import typer
 
 
-app = typer.Typer(
-    name="bot",
-    help="Управление telegram ботом"
-)
+app = typer.Typer(name="bot", help="Управление telegram ботом")
 
 
 @app.command()

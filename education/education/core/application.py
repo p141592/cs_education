@@ -9,16 +9,11 @@ __version__ = "0.1.0"
 NAME = "cs_education"
 
 
-app = typer.Typer(
-    name=NAME,
-    help="Инструменты для работы с обучением"
-)
+app = typer.Typer(name=NAME, help="Инструменты для работы с обучением")
 
 
 @app.callback(invoke_without_command=True)
-def main(
-    version: bool = typer.Option(None, "--version", "-v"),
-):
+def main(version: bool = typer.Option(None, "--version", "-v"),):
     if version:
         typer.echo(f"{NAME} version: {__version__}")
         raise typer.Exit()
