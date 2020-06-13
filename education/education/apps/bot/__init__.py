@@ -1,6 +1,8 @@
 import typer
 
 
+from .server import main as server
+
 app = typer.Typer(name="bot", help="Управление telegram ботом")
 
 
@@ -9,7 +11,8 @@ def start():
     """
     Запустить бот
     """
-    pass
+    typer.echo("Запуск бота")
+    server()
 
 
 @app.command()
