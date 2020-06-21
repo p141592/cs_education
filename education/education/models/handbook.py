@@ -1,10 +1,17 @@
 # Описание вспомогательных моделей
+from typing import Optional
+
 import sqlalchemy as s
 
-from core.db import BaseModel
+from core.db import BaseDBModel, BaseSerializerModel
 
 
-class BaseHandbook(BaseModel):
+class BaseHandbook(BaseSerializerModel):
+    id = Optional[int]
+    title: str
+
+
+class BaseDBHandbook(BaseDBModel):
     __abstract__ = True
 
     title = s.Column(s.String)
@@ -14,19 +21,43 @@ class BaseHandbook(BaseModel):
         return f'<{self.__class__.__name__}: {self.title}>'
 
 
-class Section(BaseHandbook): pass
+class Section(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass
 
 
-class MaterialType(BaseHandbook): pass
+class MaterialType(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass
 
 
-class ContentType(BaseHandbook): pass
+class ContentType(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass
 
 
-class Tag(BaseHandbook): pass
+class Tag(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass
 
 
-class LessonType(BaseHandbook): pass
+class LessonType(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass
 
 
-class QuizType(BaseHandbook): pass
+class QuizType(BaseDBHandbook):
+    pass
+
+    class Serializer(BaseHandbook):
+        pass

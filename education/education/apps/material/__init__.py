@@ -1,8 +1,6 @@
+import orjson
 import typer
-
-from apps.material.exporter import app as exporter
-from apps.material.importer import app as importer
-
+import models
 
 app = typer.Typer(
     name="material",
@@ -23,5 +21,32 @@ def index(
     pass
 
 
-app.add_typer(importer)
-app.add_typer(exporter)
+@app.command(
+    name="import"
+)
+def _import(
+    data: typer.FileText = typer.Option(...)
+):
+    """
+    Импорт материалов в базу
+
+    Структура:
+    {"table":
+        {"column": value, "index": None}
+    }\n
+    index None == Создание новой записи / не None == замена текущей
+    """
+    _source = orjson.loads(data.read())
+    for table, raws in _source.items():
+        _model = getattr(models, table)
+        assert _model.Serializer, f"Объект {table} не содержит сериализатор"
+        for _r in raws:
+            _data = _model.Serializer.parse_obj(_r)
+            pass
+    pass
+
+
+def _export(
+    name="export"
+):
+    """Экспорт материалов"""
