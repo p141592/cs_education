@@ -2,8 +2,9 @@ import orjson
 import sqlalchemy as s
 from pydantic import BaseModel
 from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.ext.declarative import declarative_base
 
-from core import Base
+Base = declarative_base()
 
 
 def orjson_dumps(v, *, default):

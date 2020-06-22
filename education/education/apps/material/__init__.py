@@ -21,6 +21,30 @@ def index(
     pass
 
 
+@app.command()
+def add():
+    """
+    Добавить материал в базе
+    """
+    pass
+
+
+@app.command()
+def select():
+    """
+    Выборка по материалам
+    """
+    pass
+
+
+@app.command()
+def remove():
+    """
+    Удалить материал по ID
+    """
+    pass
+
+
 @app.command(
     name="import"
 )
