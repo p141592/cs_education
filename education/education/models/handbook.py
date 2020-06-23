@@ -1,12 +1,14 @@
+# Описание вспомогательных моделей
+from typing import Optional
+
 import sqlalchemy as s
 
 from core.db import BaseDBModel, BaseSerializerModel
 
 
 class BaseHandbook(BaseSerializerModel):
-    id: int = None
+    id = Optional[int]
     title: str
-    key: str = None
 
 
 class BaseDBHandbook(BaseDBModel):
