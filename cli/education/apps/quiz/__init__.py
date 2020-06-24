@@ -5,23 +5,14 @@ app = typer.Typer(name="quiz", help="Работа с задачами")
 
 @app.command()
 def add():
-    """
-    Добавить quiz
-    """
-    pass
+    """Добавить quiz"""
 
 
 @app.command()
 def list():
-    """
-    Список текущих quiz
-    """
-    pass
+    """Список текущих quiz"""
 
 
 @app.command()
 def log():
-    """
-    Лог по прохождению
-    """
-    pass
+    """Лог по прохождению"""

@@ -1,12 +1,14 @@
-import orjson
 import sqlalchemy as s
-from pydantic import BaseModel
-from pydantic_sqlalchemy import sqlalchemy_to_pydantic
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.util.compat import contextmanager
+from typing import Container, Type
+from pydantic import BaseConfig, BaseModel, create_model
+from sqlalchemy.inspection import inspect
+from sqlalchemy.orm.properties import ColumnProperty
 
 DB_PATH = 'sqlite:///knowledge_base.db'
 
@@ -34,8 +36,31 @@ def session_scope():
         session.close()
 
 
-def orjson_dumps(v, *, default):
-    return orjson.dumps(v, default=default).decode()
+class PydanticConfig(BaseConfig):
+    orm_mode = True
+
+
+def sqlalchemy_to_pydantic(
+    db_model: Type, *, config: Type = PydanticConfig, exclude: Container[str] = []
+) -> Type[BaseModel]:
+    mapper = inspect(db_model)
+    fields = {}
+    for attr in mapper.attrs:
+        if isinstance(attr, ColumnProperty):
+            if attr.columns:
+                column = attr.columns[0]
+                python_type = column.type.python_type
+                name = attr.key
+                if name in exclude:
+                    continue
+                default = None
+                if column.default is None and not column.nullable:
+                    default = ...
+                fields[name] = (python_type, default)
+    pydantic_model = create_model(
+        db_model.__name__, __config__=config, **fields  # type: ignore
+    )
+    return pydantic_model
 
 
 class BaseDBModel(Base):
@@ -52,7 +77,7 @@ class BaseDBModel(Base):
     @classmethod
     def model(cls):
         if not cls._model:
-            cls._model = sqlalchemy_to_pydantic(cls)
+            cls._model = sqlalchemy_to_pydantic(cls, config=PydanticConfig, exclude=['id'])
         return cls._model
 
     def __repr__(self):
