@@ -1,7 +1,7 @@
 import orjson
 import typer
 import models
-from core import session_scope
+from core.db import session_scope, BaseDBModel
 
 app = typer.Typer(
     name="materials",
@@ -50,7 +50,9 @@ def remove():
     name="import"
 )
 def _import(
-    data: typer.FileText = typer.Argument(...)
+    data: typer.FileText = typer.Argument(...),
+    overwrite: bool = typer.Option(False, help="Перезаписать объекты, если есть такой PK"),
+    tables: models.TABLES_ENUM = typer.Option(None, help="Список таблиц в которые сделать записи", case_sensitive=False)
 ):
     """
     Импорт материалов в базу
@@ -62,13 +64,21 @@ def _import(
     index None == Создание новой записи / не None == замена текущей
     """
     _source = orjson.loads(data.read())
-
+    _t = models.TABLES
     data_candidates = []
     for table, raws in _source.items():
+        if tables and table not in tables:
+            # Пропустить таблицу, если список таблиц регулируется аргументами и этой таблицы там нет
+            continue
+
+        assert table.lower() in models.TABLES, f"Таблица {table} не объявлена в моделях"
         _model = getattr(models, table)
-        assert _model.Serializer, f"Объект {table} не содержит сериализатор"
+        assert _model.model, f"Объект {table} не содержит сериализатор"
+
         for _r in raws:
-            _data = _model.Serializer.parse_obj(_r)
+            # Добавить проверку существования ID в базе
+            # -> Если такой элемент уже есть, делать обновление
+            _data = _model.model().parse_obj(_r)
             data_candidates.append(_model(**_data.dict()))
 
     with session_scope() as session:
@@ -82,3 +92,4 @@ def _export(
         format: str = typer.Option('--format', '-f')
 ):
     """Экспорт материалов"""
+
