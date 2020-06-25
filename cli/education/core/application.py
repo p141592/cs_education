@@ -1,3 +1,5 @@
+import sqlite3
+
 import typer
 import logging
 
@@ -8,6 +10,9 @@ from apps.schedule import app as schedule
 from apps.bot import app as bot
 
 __version__ = "0.1.0"
+
+from core.db import DB_PATH
+
 NAME = "cs_education"
 
 
@@ -27,3 +32,24 @@ def main(version: bool = typer.Option(None, "--version", "-v"),):
     if version:
         typer.echo(f"{NAME} version: {__version__}")
         raise typer.Exit()
+
+
+@app.command()
+def merge(
+        source_db: typer.FileBinaryRead = typer.Argument(...)
+):
+    """Слияние баз обучения\n
+    source_db: Путь до базы sqlite, которая зальется в текущую
+    """
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        with conn:
+            conn.execute(f"""
+            attach '{source_db}' as toMerge;           
+            BEGIN; 
+            insert into AuditRecords select * from toMerge.AuditRecords; 
+            COMMIT; 
+            detach toMerge;
+            """)
+    finally:
+        conn.close()
