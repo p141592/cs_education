@@ -21,7 +21,7 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-config.set_main_option("sqlalchemy.url", str(settings.DB_PATH))
+config.set_main_option("sqlalchemy.url", str(settings.DB_DSN))
 target_metadata = Base.metadata
 
 

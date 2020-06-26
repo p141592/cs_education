@@ -9,9 +9,9 @@ from apps.quiz import app as quiz
 from apps.schedule import app as schedule
 from apps.bot import app as bot
 
-__version__ = "0.1.0"
+from settings import settings
 
-from core.db import DB_PATH
+__version__ = "0.1.0"
 
 NAME = "cs_education"
 
@@ -41,7 +41,8 @@ def merge(
     """Слияние баз обучения\n
     source_db: Путь до базы sqlite, которая зальется в текущую
     """
-    conn = sqlite3.connect(DB_PATH)
+    print(settings.DB_DSN)
+    conn = sqlite3.connect(settings.DB_DSN)
     try:
         with conn:
             conn.execute(f"""

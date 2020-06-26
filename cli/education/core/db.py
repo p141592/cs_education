@@ -10,22 +10,20 @@ from pydantic import BaseConfig, BaseModel, create_model
 from sqlalchemy.inspection import inspect
 from sqlalchemy.orm.properties import ColumnProperty
 
-DB_PATH = 'sqlite:///knowledge_base.db'
+from settings import settings
 
 Base = declarative_base()
 engine = create_engine(
-    DB_PATH,
+    settings.DB_DSN,
     echo=True,
     connect_args={"check_same_thread": False}
 )
-
-Session = sessionmaker(bind=engine)
 
 
 @contextmanager
 def session_scope():
     """Provide a transactional scope around a series of operations."""
-    session = Session()
+    session = sessionmaker(bind=engine)()
     try:
         yield session
         session.commit()
