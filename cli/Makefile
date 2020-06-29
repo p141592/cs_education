@@ -15,9 +15,6 @@ makemigrations:
 migrate:
 	PYTHONPATH=${PYTHONPATH} poetry run alembic upgrade head
 
-merge_db:
-	# Смерджить базу с текущей
-
 progress:
 	PYTHONPATH=${PYTHONPATH} jupyter notebook education/apps/progress/status.ipynb
 
