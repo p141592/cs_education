@@ -18,6 +18,7 @@ python-dotenv = "^0.13.0"
 ujson = "^3.0.0"
 orjson = "^3.1.1"
 pydantic-sqlalchemy = "^0.0.4"
+caldav = "^0.7.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.3"
