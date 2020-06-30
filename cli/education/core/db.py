@@ -10,14 +10,11 @@ from pydantic import BaseConfig, BaseModel, create_model
 from sqlalchemy.inspection import inspect
 from sqlalchemy.orm.properties import ColumnProperty
 
-from settings import settings
+
+DB_PATH = "sqlite:///knowledge_base.db"
 
 Base = declarative_base()
-engine = create_engine(
-    settings.DB_DSN,
-    echo=True,
-    connect_args={"check_same_thread": False}
-)
+engine = create_engine(DB_PATH, echo=True, connect_args={"check_same_thread": False})
 
 
 @contextmanager
@@ -38,9 +35,7 @@ class PydanticConfig(BaseConfig):
     orm_mode = True
 
 
-def sqlalchemy_to_pydantic(
-    db_model: Type, *, config: Type = PydanticConfig, exclude: Container[str] = []
-) -> Type[BaseModel]:
+def sqlalchemy_to_pydantic(db_model: Type, *, config: Type = PydanticConfig, exclude: Container[str] = []) -> Type[BaseModel]:
     mapper = inspect(db_model)
     fields = {}
     for attr in mapper.attrs:
@@ -64,7 +59,7 @@ def sqlalchemy_to_pydantic(
 class BaseDBModel(Base):
     __abstract__ = True
     _model = None
-    readable_field = 'id'
+    readable_field = "id"
 
     @declared_attr
     def __tablename__(cls) -> str:
@@ -75,8 +70,8 @@ class BaseDBModel(Base):
     @classmethod
     def model(cls):
         if not cls._model:
-            cls._model = sqlalchemy_to_pydantic(cls, config=PydanticConfig, exclude=['id'])
+            cls._model = sqlalchemy_to_pydantic(cls, config=PydanticConfig, exclude=["id"])
         return cls._model
 
     def __repr__(self):
-        return f'<{self.__class__.__name__}: {getattr(self, self.readable_field)}>'
+        return f"<{self.__class__.__name__}: {getattr(self, self.readable_field)}>"

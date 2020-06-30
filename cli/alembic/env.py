@@ -7,8 +7,7 @@ from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from core.db import Base
-from settings import settings
+from core.db import Base, DB_PATH
 
 config = context.config
 
@@ -21,7 +20,7 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 
-config.set_main_option("sqlalchemy.url", str(settings.DB_DSN))
+config.set_main_option("sqlalchemy.url", DB_PATH)
 target_metadata = Base.metadata
 
 

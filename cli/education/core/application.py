@@ -9,8 +9,6 @@ from apps.quiz import app as quiz
 from apps.schedule import app as schedule
 from apps.bot import app as bot
 
-from settings import settings
-
 __version__ = "0.1.0"
 
 NAME = "cs_education"
@@ -35,22 +33,16 @@ def main(version: bool = typer.Option(None, "--version", "-v"),):
 
 
 @app.command()
-def merge(
-        source_db: typer.FileBinaryRead = typer.Argument(...)
-):
+def merge(source_db: str = typer.Argument(...)):
     """Слияние баз обучения\n
     source_db: Путь до базы sqlite, которая зальется в текущую
     """
-    print(settings.DB_DSN)
-    conn = sqlite3.connect(settings.DB_DSN)
-    try:
-        with conn:
-            conn.execute(f"""
-            attach '{source_db}' as toMerge;           
+    with sqlite3.connect(source_db) as con:
+        con.executescript(
+            f"""attach '{source_db}' as toMerge;           
             BEGIN; 
             insert into AuditRecords select * from toMerge.AuditRecords; 
             COMMIT; 
             detach toMerge;
-            """)
-    finally:
-        conn.close()
+            """
+        )
