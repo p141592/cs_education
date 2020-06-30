@@ -7,9 +7,9 @@ from core.db import BaseDBModel
 class Material(BaseDBModel):
     readable_field = "source"
 
-    section = s.Column(s.Integer, s.ForeignKey('section.id'))
-    material_type = s.Column(s.Integer, s.ForeignKey('materialtype.id'))
-    content_type = s.Column(s.Integer, s.ForeignKey('contenttype.id'))
+    section = s.Column(s.Integer, s.ForeignKey("section.id"))
+    material_type = s.Column(s.Integer, s.ForeignKey("materialtype.id"))
+    content_type = s.Column(s.Integer, s.ForeignKey("contenttype.id"))
     source = s.Column(s.String)
     volume = s.Column(s.Integer, doc="Объем материала в минутах")
 
@@ -62,7 +62,7 @@ class Lesson(BaseDBModel):
 
 
 class Note(BaseDBModel):
-    lesson = s.Column(s.Integer, s.ForeignKey('lesson.id'))
+    lesson = s.Column(s.Integer, s.ForeignKey("lesson.id"))
     text = s.Column(s.Text)
     date = s.Column(s.DateTime, default=func.now())
 
@@ -73,4 +73,3 @@ class Timer(BaseDBModel):
     end_date = s.Column(s.DateTime, default=func.now())
     text = s.Column(s.Text, nullable=True)
     lesson = s.Column(s.Integer, s.ForeignKey("lesson.id"))
-

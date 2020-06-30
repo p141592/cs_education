@@ -7,13 +7,11 @@ from .timer import app as timer
 app = typer.Typer(name="progress", help="Работа с прогрессом обучения")
 
 
-FormatEnum = Enum('FormatEnum', " ".join(["json", "markdown"]))
+FormatEnum = Enum("FormatEnum", " ".join(["json", "markdown"]))
 
 
 @app.command()
-def export(
-        _format: FormatEnum = typer.Option(None, "-f", "--format")
-):
+def export(_format: FormatEnum = typer.Option(None, "-f", "--format")):
     """Экспорт прогресса в какой-то формат"""
 
 
