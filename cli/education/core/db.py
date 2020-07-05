@@ -1,4 +1,5 @@
 import sqlalchemy as s
+from pydantic_sqlalchemy import sqlalchemy_to_pydantic
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declared_attr
@@ -35,27 +36,6 @@ class PydanticConfig(BaseConfig):
     orm_mode = True
 
 
-def sqlalchemy_to_pydantic(db_model: Type, *, config: Type = PydanticConfig, exclude: Container[str] = []) -> Type[BaseModel]:
-    mapper = inspect(db_model)
-    fields = {}
-    for attr in mapper.attrs:
-        if isinstance(attr, ColumnProperty):
-            if attr.columns:
-                column = attr.columns[0]
-                python_type = column.type.python_type
-                name = attr.key
-                if name in exclude:
-                    continue
-                default = None
-                if column.default is None and not column.nullable:
-                    default = ...
-                fields[name] = (python_type, default)
-    pydantic_model = create_model(
-        db_model.__name__, __config__=config, **fields  # type: ignore
-    )
-    return pydantic_model
-
-
 class BaseDBModel(Base):
     __abstract__ = True
     _model = None
@@ -68,10 +48,8 @@ class BaseDBModel(Base):
     id = s.Column(s.Integer, primary_key=True, unique=True, autoincrement=True)
 
     @classmethod
-    def model(cls):
-        if not cls._model:
-            cls._model = sqlalchemy_to_pydantic(cls, config=PydanticConfig, exclude=["id"])
-        return cls._model
+    def model(cls, **kwargs):
+        return sqlalchemy_to_pydantic(cls, config=PydanticConfig, **kwargs)
 
     def __repr__(self):
         return f"<{self.__class__.__name__}: {getattr(self, self.readable_field)}>"

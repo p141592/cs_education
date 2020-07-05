@@ -1,7 +1,12 @@
+from pathlib import Path
+from typing import List, Dict, Any
+
+import click
 import orjson
 import typer
 import models
 from core.db import session_scope
+from settings import BASE_DIR
 
 app = typer.Typer(name="materials", help="Работа с материалами")
 
@@ -17,25 +22,52 @@ def index(
 
 
 @app.command()
-def add():
+def add(
+        table: models.TABLES_ENUM = typer.Option(
+            ..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False
+        ),
+        body: Any = typer.Argument(None),
+        repeat: bool = typer.Option(True, "")
+):
     """Добавить материал в базу"""
+    with session_scope() as session:
+        # Получаем таблицу
+        _table = getattr(models, table)
+        # Если есть аргументы в словаре -- завершение
+        if body:
+            data = _table.model()(body)  # Выкинет исключение, а нам это и хорошо
+            session.add(_table(**data.dict()))
+        else:
+            while True:
+                # Если нет -- получаем все поля модели, просим пользователя ввести их по очереди -- завершение
+                # Завершение: валидируем аргументы, сохраняем записть, возвращаем данные как они в базе
+                if not repeat or not click.confirm('Добавить еще?'):
+                    break
 
 
 @app.command()
-def select():
+def select(
+        tags: List
+):
     """Выборка по материалам"""
 
 
 @app.command()
-def remove():
+def remove(
+        id: int = typer.Argument(...),
+        table: models.TABLES_ENUM = typer.Option(
+            ..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False
+        )
+):
     """Удалить материал по ID"""
 
 
 @app.command(name="import")
 def _import(
-    data: typer.FileText = typer.Argument(...),
-    overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
-    tables: models.TABLES_ENUM = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+        data: typer.FileText = typer.Argument(...),
+        overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
+        tables: List[models.TABLES_ENUM] = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи",
+                                                  case_sensitive=False)
 ):
     """
     Импорт материалов в базу
@@ -47,8 +79,7 @@ def _import(
     index None == Создание новой записи / не None == замена текущей
     """
     _source = orjson.loads(data.read())
-    _t = models.TABLES
-    data_candidates = []
+
     with session_scope() as session:
         for table, raws in _source.items():
             if tables and table not in tables:
@@ -62,18 +93,30 @@ def _import(
                 _id = _r.pop("id", None)
                 # Добавить проверку существования ID в базе
                 # -> Если такой элемент уже есть, делать обновление
-                _data = _object.model().parse_obj(_r)
+                _data = _object.model(exclude=['id']).parse_obj(_r)
                 one = session.query(_object).filter_by(id=_id).one_or_none()
 
                 if one:
                     if not overwrite:
                         print(f"Объект {table}{_r} не записан")
                         continue
-                    session.query(_object).filter(_object.id == _id).update(_data.dict())
+                    session.query(_object).filter(_object.id == _id) \
+                        .update(_data.dict())
                 else:
                     session.add(_object(**_data.dict()))
 
 
-@app.command(name="export")
-def _export(format: str = typer.Option("--format", "-f")):
+@app.command(
+    name="export"
+)
+def _export(
+        format: str = typer.Option('json', '--format', '-f'),
+        tables: models.TABLES_ENUM = typer.Option(
+            None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False
+        ),
+        path: Path = typer.Option(Path(BASE_DIR)),
+        filename: str = typer.Option("cs_education_dump")
+):
     """Экспорт материалов"""
+    # Получить список всех таблиц
+    #
