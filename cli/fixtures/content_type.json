@@ -1,0 +1,10 @@
+{
+		"ContentType": [
+				{"key": "article", "title": "Статья"}, 
+				{"key": "book", "title": "Книга"}, 
+				{"key": "lecture", "title": "Лекция"}, 
+				{"key": "report", "title": "Доклад"}, 
+				{"key": "documentation", "title": "Документация"}, 
+				{"key": "interaction", "title": "Интерактив"}
+		]
+}

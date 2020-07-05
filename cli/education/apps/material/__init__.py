@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List
 
 import click
 import orjson
@@ -26,7 +26,7 @@ def add(
         table: models.TABLES_ENUM = typer.Option(
             ..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False
         ),
-        body: Any = typer.Argument(None),
+        body: str = typer.Argument(None),
         repeat: bool = typer.Option(True, "")
 ):
     """Добавить материал в базу"""
@@ -46,9 +46,7 @@ def add(
 
 
 @app.command()
-def select(
-        tags: List
-):
+def select():
     """Выборка по материалам"""
 
 
