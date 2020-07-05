@@ -8,14 +8,51 @@
 				{"id": 6, "key": "interaction", "title": "Интерактив"}
 		],
 		"LessonType": [
-				{"id": 1, "key": "lecture", "title": "Лекция"}, 
-				{"id": 2, "key": "exam", "title": "Экзамен"}, 
-				{"id": 3, "key": "text", "title": "Зачет"},
-				{"id": 4, "key": "laboratory", "title": "Лабораторная работа"},
-				{"id": 5, "key": "discussion", "title": "Дискуссия"},
-				{"id": 6, "key": "master-class", "title": "Мастер-класс"},
-				{"id": 7, "key": "excursion", "title": "Экскурсия"},
-				{"id": 8, "key": "presentation", "title": "Презентация"}
+				{
+						"id": 1, 
+						"key": "lecture", 
+						"title": "Лекция",
+						"description": "",
+						"goal": "",
+						"plan": "",
+						"result": ""
+				}, 
+				{
+						"id": 2, 
+						"key": "exam", 
+						"title": "Экзамен",
+						""
+				}, 
+				{
+						"id": 3, 
+						"key": "text", 
+						"title": "Зачет"
+				},
+				{
+						"id": 4, 
+						"key": "laboratory", 
+						"title": "Лабораторная работа"
+				},
+				{
+						"id": 5, 
+						"key": "discussion", 
+						"title": "Дискуссия"
+				},
+				{
+						"id": 6, 
+						"key": "master-class", 
+						"title": "Мастер-класс"
+				},
+				{
+						"id": 7, 
+						"key": "excursion", 
+						"title": "Экскурсия"
+				},
+				{
+						"id": 8, 
+						"key": "presentation", 
+						"title": "Презентация"
+				}
 		], 
 		"MaterialType": [
 				{"id": 1, "key": "text", "title": "Текст"},
@@ -28,5 +65,20 @@
 				{"id": 2, "key": "bool", "title": "True/False"},
 				{"id": 3, "key": "one", "title": "Один правильный ответ"},
 				{"id": 4, "key": "many", "title": "Несколько правильных ответов"}
+		],
+		"Section": [
+				{"id": 1, "key": "computer_basics", "title": "Базовые знания работы компьютерных систем"},
+				{"id": 2, "key": "networking", "title": "Сети"},
+				{"id": 3, "key": "mathematics", "title": "Базовые знания математики"},
+				{"id": 4, "key": "algorithms", "title": "Алгоритмы"},
+				{"id": 5, "key": "database", "title": "Базы данных"},
+				{"id": 6, "key": "pototyping", "title": "Проектирование ПО"},
+				{"id": 7, "key": "cloud_infra", "title": "Облачная инфраструктура"},
+				{"id": 8, "key": "python", "title": "Python"},
+				{"id": 9, "key": "golang", "title": "Golang"},
+				{"id": 10, "key": "julia", "title": "Julia"},
+				{"id": 11, "key": "lua", "title": "Lua"},
+				{"id": 12, "key": "ml", "title": "ML"},
+				{"id": 13, "key": "clang", "title": "С/С++"}
 		]
 }
