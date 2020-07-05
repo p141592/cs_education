@@ -1,0 +1,32 @@
+{
+		"ContentType": [
+				{"id": 1, "key": "article", "title": "Статья"},
+				{"id": 2, "key": "book", "title": "Книга"},
+				{"id": 3, "key": "lecture", "title": "Лекция"},
+				{"id": 4, "key": "report", "title": "Доклад"},
+				{"id": 5, "key": "documentation", "title": "Документация"},
+				{"id": 6, "key": "interaction", "title": "Интерактив"}
+		],
+		"LessonType": [
+				{"id": 1, "key": "lecture", "title": "Лекция"}, 
+				{"id": 2, "key": "exam", "title": "Экзамен"}, 
+				{"id": 3, "key": "text", "title": "Зачет"},
+				{"id": 4, "key": "laboratory", "title": "Лабораторная работа"},
+				{"id": 5, "key": "discussion", "title": "Дискуссия"},
+				{"id": 6, "key": "master-class", "title": "Мастер-класс"},
+				{"id": 7, "key": "excursion", "title": "Экскурсия"},
+				{"id": 8, "key": "presentation", "title": "Презентация"}
+		], 
+		"MaterialType": [
+				{"id": 1, "key": "text", "title": "Текст"},
+				{"id": 2, "key": "video", "title": "Видео"}, 
+				{"id": 3, "key": "interaction", "title": "Интерактив"}, 
+				{"id": 4, "key": "libe", "title": "live"}
+		],
+		"QuizType": [
+				{"id": 1, "key": "free", "title": "Свободный ответ"},
+				{"id": 2, "key": "bool", "title": "True/False"},
+				{"id": 3, "key": "one", "title": "Один правильный ответ"},
+				{"id": 4, "key": "many", "title": "Несколько правильных ответов"}
+		]
+}
