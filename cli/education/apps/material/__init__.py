@@ -27,8 +27,14 @@ def select():
 
 
 @app.command()
-def remove():
+def remove(
+        table: models.TABLES_ENUM = typer.Argument(...),
+        id: int = typer.Argument(...)
+):
     """Удалить материал по ID"""
+    with session_scope() as session:
+        _object = getattr(models, table)
+        session.delete(_object.query.filter_by(id=id))
 
 
 @app.command(name="import")
