@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b8a2d1dc6461
+Revision ID: 87128d0d47c3
 Revises: 
-Create Date: 2020-07-05 22:03:20.781248
+Create Date: 2020-07-05 23:09:48.775716
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b8a2d1dc6461'
+revision = '87128d0d47c3'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,34 +21,38 @@ def upgrade():
     op.create_table('contenttype',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('lessontype',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('goal', sa.Text(), nullable=True),
     sa.Column('plan', sa.Text(), nullable=True),
     sa.Column('result', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('materialtype',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('quiztype',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('schedule',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
@@ -60,27 +64,30 @@ def upgrade():
     op.create_table('section',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('topic',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.Column('parent_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['parent_id'], ['topic.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('course',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(), nullable=True),
-    sa.Column('key', sa.String(), nullable=True),
+    sa.Column('key', sa.String(), nullable=False),
     sa.Column('schedule_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['schedule_id'], ['schedule.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('id')
+    sa.UniqueConstraint('id'),
+    sa.UniqueConstraint('key')
     )
     op.create_table('lesson',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),

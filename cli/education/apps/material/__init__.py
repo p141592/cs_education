@@ -29,7 +29,7 @@ def add(
         body: str = typer.Argument(None),
         repeat: bool = typer.Option(True, "")
 ):
-    """Добавить материал в базу"""
+    """WIP: Добавить материал в базу"""
     with session_scope() as session:
         # Получаем таблицу
         _table = getattr(models, table)
@@ -57,7 +57,7 @@ def remove(
             ..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False
         )
 ):
-    """Удалить материал по ID"""
+    """WIP: Удалить материал по ID"""
     with session_scope() as session:
         _object = getattr(models, table)
         session.delete(_object.query.filter_by(id=id))
@@ -112,13 +112,26 @@ def _import(
     name="export"
 )
 def _export(
-        format: str = typer.Option('json', '--format', '-f'),
         tables: models.TABLES_ENUM = typer.Option(
             None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False
         ),
-        path: Path = typer.Option(Path(BASE_DIR)),
         filename: str = typer.Option("cs_education_dump")
 ):
-    """Экспорт материалов"""
-    # Получить список всех таблиц
-    #
+    """WIP: Экспорт материалов"""
+
+    def dict_factory(cursor, row):
+        d = {}
+        for idx, col in enumerate(cursor.description):
+            d[col[0]] = row[idx]
+        return d
+
+    with session_scope() as session:
+
+        session.row_factory = dict_factory
+
+        tables = session.execute("SELECT name FROM sqlite_master WHERE type='table';")
+
+        with open(f"{filename}.json", 'w') as dump:
+            for table_name in tables:
+                results = session.execute("SELECT * FROM " + table_name['name'])
+                dump.write(format(results).replace(" u'", "'").replace("'", "\""))

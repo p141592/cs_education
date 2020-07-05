@@ -60,4 +60,4 @@ class BaseDBHandbook(BaseDBModel):
     readable_field = "title"
 
     title = s.Column(s.String)
-    key = s.Column(s.String)
+    key = s.Column(s.String, nullable=False, unique=True)
