@@ -60,6 +60,9 @@ def remove(
         )
 ):
     """Удалить материал по ID"""
+    with session_scope() as session:
+        _object = getattr(models, table)
+        session.delete(_object.query.filter_by(id=id))
 
 
 @app.command(name="import")
