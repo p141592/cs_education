@@ -53,3 +53,11 @@ class BaseDBModel(Base):
 
     def __repr__(self):
         return f"<{self.__class__.__name__}: {getattr(self, self.readable_field)}>"
+
+
+class BaseDBHandbook(BaseDBModel):
+    __abstract__ = True
+    readable_field = "title"
+
+    title = s.Column(s.String)
+    key = s.Column(s.String)

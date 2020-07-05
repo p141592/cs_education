@@ -1,8 +1,12 @@
 import itertools
 from enum import Enum
 
-from .handbook import *
-from .materials import *
+from .course import *
+from .lesson import *
+from .material import *
+from .quiz import *
+from .schedule import *
+
 
 METATABLES = BaseDBHandbook, BaseDBModel
 convert_subclass_to_name = lambda x: x.__tablename__ if x not in METATABLES else None
