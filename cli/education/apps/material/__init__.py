@@ -105,6 +105,7 @@ def _import(
                         continue
                     session.query(_object).filter(_object.id == _id) \
                         .update(_data.dict())
+                    session.query(_object).filter(_object.id == _id).update(_data.dict())
                 else:
                     session.add(_object(**_data.dict()))
 
