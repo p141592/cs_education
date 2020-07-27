@@ -27,18 +27,4 @@ lock:
 linter:
 	poetry run black --line-length 160 education
 
-build: test linter lock
-	docker build -t ${DOCKER_REGISTRY}/${PROJECT_NAME}:${TAG} .
-
-run: build
-	docker run -it ${DOCKER_REGISTRY}/${PROJECT_NAME}:${TAG}
-
-push: build
-	docker push ${DOCKER_REGISTRY}/${PROJECT_NAME}:${TAG}
-
-# deploy
-gcloud-deploy: push
-	gcloud run deploy ${PROJECT_NAME} --image ${DOCKER_REGISTRY}/${PROJECT_NAME}:${TAG} --memory ${MEMORY_LIMIT} --platform managed --set-env-vars ${ENV_VARIABLES}
-
-gcloud-remove:
-	gcloud run service delete ${PROJECT_NAME}
+done: test linter lock

@@ -6,8 +6,6 @@ BASE_DIR = Path(__file__).parent.parent
 
 
 class Settings(BaseSettings):
-    BOT_TOKEN: str
-
     class Config:
         env_file = BASE_DIR / ".env"
 

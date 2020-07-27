@@ -23,11 +23,9 @@ def index(
 
 @app.command()
 def add(
-        table: models.TABLES_ENUM = typer.Option(
-            ..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False
-        ),
-        body: str = typer.Argument(None),
-        repeat: bool = typer.Option(True, "")
+    table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False),
+    body: str = typer.Argument(None),
+    repeat: bool = typer.Option(True, ""),
 ):
     """WIP: Добавить материал в базу"""
     with session_scope() as session:
@@ -41,7 +39,7 @@ def add(
             while True:
                 # Если нет -- получаем все поля модели, просим пользователя ввести их по очереди -- завершение
                 # Завершение: валидируем аргументы, сохраняем записть, возвращаем данные как они в базе
-                if not repeat or not click.confirm('Добавить еще?'):
+                if not repeat or not click.confirm("Добавить еще?"):
                     break
 
 
@@ -52,10 +50,7 @@ def select():
 
 @app.command()
 def remove(
-        id: int = typer.Argument(...),
-        table: models.TABLES_ENUM = typer.Option(
-            ..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False
-        )
+    id: int = typer.Argument(...), table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False)
 ):
     """WIP: Удалить материал по ID"""
     with session_scope() as session:
@@ -65,10 +60,9 @@ def remove(
 
 @app.command(name="import")
 def _import(
-        data: typer.FileText = typer.Argument(...),
-        overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
-        tables: List[models.TABLES_ENUM] = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи",
-                                                  case_sensitive=False)
+    data: typer.FileText = typer.Argument(...),
+    overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
+    tables: List[models.TABLES_ENUM] = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
 ):
     """
     Импорт материалов в базу
@@ -94,28 +88,23 @@ def _import(
                 _id = _r.pop("id", None)
                 # Добавить проверку существования ID в базе
                 # -> Если такой элемент уже есть, делать обновление
-                _data = _object.model(exclude=['id']).parse_obj(_r)
+                _data = _object.model(exclude=["id"]).parse_obj(_r)
                 one = session.query(_object).filter_by(id=_id).one_or_none()
 
                 if one:
                     if not overwrite:
                         print(f"Объект {table}{_r} не записан")
                         continue
-                    session.query(_object).filter(_object.id == _id) \
-                        .update(_data.dict())
+                    session.query(_object).filter(_object.id == _id).update(_data.dict())
                     session.query(_object).filter(_object.id == _id).update(_data.dict())
                 else:
                     session.add(_object(**_data.dict()))
 
 
-@app.command(
-    name="export"
-)
+@app.command(name="export")
 def _export(
-        tables: models.TABLES_ENUM = typer.Option(
-            None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False
-        ),
-        filename: str = typer.Option("cs_education_dump")
+    tables: models.TABLES_ENUM = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+    filename: str = typer.Option("cs_education_dump"),
 ):
     """WIP: Экспорт материалов"""
 
@@ -131,7 +120,7 @@ def _export(
 
         tables = session.execute("SELECT name FROM sqlite_master WHERE type='table';")
 
-        with open(f"{filename}.json", 'w') as dump:
+        with open(f"{filename}.json", "w") as dump:
             for table_name in tables:
-                results = session.execute("SELECT * FROM " + table_name['name'])
-                dump.write(format(results).replace(" u'", "'").replace("'", "\""))
+                results = session.execute("SELECT * FROM " + table_name["name"])
+                dump.write(format(results).replace(" u'", "'").replace("'", '"'))
