@@ -3,13 +3,10 @@ import sqlite3
 import typer
 import logging
 
-from apps.material import app as material
-from apps.progress import app as progress
-from apps.quiz import app as quiz
-from apps.schedule import app as schedule
-from apps.bot import app as bot
+from apps.quiz.app import app as quiz
+from apps.schedule.app import app as schedule
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 NAME = "cs_education"
 
@@ -18,11 +15,8 @@ logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 app = typer.Typer(name=NAME, help="Инструменты для работы с обучением")
 
-app.add_typer(material)
-app.add_typer(progress)
 app.add_typer(quiz)
 app.add_typer(schedule)
-app.add_typer(bot)
 
 
 @app.callback(invoke_without_command=True)
@@ -33,16 +27,111 @@ def main(version: bool = typer.Option(None, "--version", "-v"),):
 
 
 @app.command()
-def merge(source_db: str = typer.Argument(...)):
-    """Слияние баз обучения\n
-    source_db: Путь до базы sqlite, которая зальется в текущую
+def add(
+    table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False),
+    body: str = typer.Argument(None),
+    repeat: bool = typer.Option(True, ""),
+):
+    """WIP: Добавить материал в базу"""
+    with session_scope() as session:
+        # Получаем таблицу
+        _table = getattr(models, table)
+        # Если есть аргументы в словаре -- завершение
+        if body:
+            data = _table.model()(body)  # Выкинет исключение, а нам это и хорошо
+            session.add(_table(**data.dict()))
+        else:
+            while True:
+                # Если нет -- получаем все поля модели, просим пользователя ввести их по очереди -- завершение
+                # Завершение: валидируем аргументы, сохраняем записть, возвращаем данные как они в базе
+                if not repeat or not click.confirm("Добавить еще?"):
+                    break
+
+
+@app.command(name="import")
+def _import(
+    data: typer.FileText = typer.Argument(...),
+    overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
+    tables: List[models.TABLES_ENUM] = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+):
     """
-    with sqlite3.connect(source_db) as con:
-        con.executescript(
-            f"""attach '{source_db}' as toMerge;           
-            BEGIN; 
-            insert into AuditRecords select * from toMerge.AuditRecords; 
-            COMMIT; 
-            detach toMerge;
-            """
-        )
+    Импорт материалов в базу
+
+    Структура:
+    {"table":
+        {"column": value, "index": None}
+    }\n
+    index None == Создание новой записи / не None == замена текущей
+    """
+    _source = orjson.loads(data.read())
+
+    with session_scope() as session:
+        for table, raws in _source.items():
+            if tables and table not in tables:
+                # Пропустить таблицу, если список таблиц регулируется аргументами и этой таблицы там нет
+                continue
+
+            _object = getattr(models, table)
+            assert _object, f"Таблицы {table} не существует"
+
+            for _r in raws:
+                _id = _r.pop("id", None)
+                # Добавить проверку существования ID в базе
+                # -> Если такой элемент уже есть, делать обновление
+                _data = _object.model(exclude=["id"]).parse_obj(_r)
+                one = session.query(_object).filter_by(id=_id).one_or_none()
+
+                if one:
+                    if not overwrite:
+                        print(f"Объект {table}{_r} не записан")
+                        continue
+                    session.query(_object).filter(_object.id == _id).update(_data.dict())
+                    session.query(_object).filter(_object.id == _id).update(_data.dict())
+                else:
+                    session.add(_object(**_data.dict()))
+
+
+@app.command(name="export")
+def _export(
+    tables: models.TABLES_ENUM = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+    filename: str = typer.Option("cs_education_dump"),
+):
+    """WIP: Экспорт материалов"""
+
+    def dict_factory(cursor, row):
+        d = {}
+        for idx, col in enumerate(cursor.description):
+            d[col[0]] = row[idx]
+        return d
+
+    with session_scope() as session:
+
+        session.row_factory = dict_factory
+
+        tables = session.execute("SELECT name FROM sqlite_master WHERE type='table';")
+
+        with open(f"{filename}.json", "w") as dump:
+            for table_name in tables:
+                results = session.execute("SELECT * FROM " + table_name["name"])
+                dump.write(format(results).replace(" u'", "'").replace("'", '"'))
+
+
+@app.command()
+def index(
+    content_type: str = typer.Option(None, "--content-type", "-c"),
+    material_type: str = typer.Option(None, "--material-type", "-m"),
+    section: str = typer.Option(None, "--section", "-s"),
+    format: str = typer.Option("markdown", "--format", "-f", show_default=True),
+):
+    """Генерация индекса материалов"""
+
+
+@app.command()
+def remove(
+    id: int = typer.Argument(...), table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False)
+):
+    """WIP: Удалить материал по ID"""
+    with session_scope() as session:
+        _object = getattr(models, table)
+        session.delete(_object.query.filter_by(id=id))
+
