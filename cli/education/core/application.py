@@ -1,12 +1,15 @@
-import sqlite3
+from typing import List
 
+import click
+import orjson
 import typer
 import logging
 
-from apps.quiz.app import app as quiz
-from apps.schedule.app import app as schedule
+import models
 
 __version__ = "0.2.0"
+
+from core.db import session_scope
 
 NAME = "cs_education"
 
@@ -14,9 +17,6 @@ NAME = "cs_education"
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 app = typer.Typer(name=NAME, help="Инструменты для работы с обучением")
-
-app.add_typer(quiz)
-app.add_typer(schedule)
 
 
 @app.callback(invoke_without_command=True)
@@ -28,9 +28,10 @@ def main(version: bool = typer.Option(None, "--version", "-v"),):
 
 @app.command()
 def add(
-    table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False),
-    body: str = typer.Argument(None),
-    repeat: bool = typer.Option(True, ""),
+    table: models.TABLES_ENUM = typer.Option(
+        ..., "--table", "-t", help="Таблица в которую добавить запись", case_sensitive=False
+    ),
+    body: str = typer.Argument(None)
 ):
     """WIP: Добавить материал в базу"""
     with session_scope() as session:
@@ -52,7 +53,9 @@ def add(
 def _import(
     data: typer.FileText = typer.Argument(...),
     overwrite: bool = typer.Option(False, "--overwrite", "-w", help="Перезаписать объекты, если есть такой PK"),
-    tables: List[models.TABLES_ENUM] = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+    tables: List[models.TABLES_ENUM] = typer.Option(
+        None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False
+    ),
 ):
     """
     Импорт материалов в базу
@@ -93,7 +96,9 @@ def _import(
 
 @app.command(name="export")
 def _export(
-    tables: models.TABLES_ENUM = typer.Option(None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False),
+    tables: models.TABLES_ENUM = typer.Option(
+        None, "--tables", "-t", help="Список таблиц в которые сделать записи", case_sensitive=False
+    ),
     filename: str = typer.Option("cs_education_dump"),
 ):
     """WIP: Экспорт материалов"""
@@ -123,15 +128,17 @@ def index(
     section: str = typer.Option(None, "--section", "-s"),
     format: str = typer.Option("markdown", "--format", "-f", show_default=True),
 ):
-    """Генерация индекса материалов"""
+    """WIP: Генерация индекса материалов"""
 
 
 @app.command()
 def remove(
-    id: int = typer.Argument(...), table: models.TABLES_ENUM = typer.Option(..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False)
+    id: int = typer.Argument(...),
+    table: models.TABLES_ENUM = typer.Option(
+        ..., "--table", "-t", help="Таблица в которой удалить записи", case_sensitive=False
+    ),
 ):
     """WIP: Удалить материал по ID"""
     with session_scope() as session:
         _object = getattr(models, table)
         session.delete(_object.query.filter_by(id=id))
-

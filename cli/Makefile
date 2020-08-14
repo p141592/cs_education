@@ -25,6 +25,6 @@ lock:
 	poetry lock 
 
 linter:
-	poetry run black --line-length 160 education
+	poetry run black --line-length 120 education .
 
 done: test linter lock
